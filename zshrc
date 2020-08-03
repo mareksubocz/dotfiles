@@ -1,5 +1,7 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 export ZSH="/Users/mareksubocz/.oh-my-zsh"
+export EDITOR='nvim'
+export VISUAL='nvim'
 ZSH_THEME="robbyrussell"
 eval "$(pyenv init -)"
 
@@ -10,31 +12,28 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 
 plugins=(
 	git
-	z
+        # zsh-syntax-highlighting
+        zsh-autosuggestions
 )
 
 source $ZSH/oh-my-zsh.sh
-
-if [[ -n $SSH_CONNECTION ]]; then
-  export EDITOR='vim'
-else
-	export EDITOR='subl'
-fi
+bindkey -v
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
 alias zshconfig="subl ~/.zshrc"
+alias vimconfig="nvim ~/.config/nvim/init.vim"
 alias git=hub
 alias pdflatex="/Library/TeX/Distributions/.DefaultTeX/Contents/Programs/texbin/pdflatex"
 alias polluks="ssh inf136806@polluks.cs.put.poznan.pl"
 alias myg++="g++-9 -Wall -Wextra -Wshadow -Wconversion -Wnon-virtual-dtor -pedantic -Wfatal-errors -g -std=c++17 -Wno-sign-compare -fsanitize=undefined,address -Wno-builtin-macro-redefined"
 alias activenv="source venv/bin/activate"
-alias vim=nvim
 alias vs=code
 alias cleanbrew="brew bundle dump && brew bundle --force cleanup"
 
 export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
+# export JAVA_HOME=/Library/Java/Home
 
 # function cd() {
 #   builtin cd "$@"
@@ -51,7 +50,7 @@ export LC_ALL=en_US.UTF-8
 #         source "${venv_filepath}"/bin/activate
 #       fi
 #   else
-#     # If the current directory is not contained 
+#     # If the current directory is not contained
 #     # within the venv parent directory -> deactivate the venv.
 #       cur_dir=$(pwd -P)
 #       venv_dir="$(dirname "$VIRTUAL_ENV")"
@@ -70,7 +69,7 @@ function auto_active_env() {
 
   ## If env folder is found then activate the vitualenv
   function activate_venv() {
-    if [[ -f "${DEFAULT_ENV_PATH}/bin/activate" ]] ; then 
+    if [[ -f "${DEFAULT_ENV_PATH}/bin/activate" ]] ; then
       source "${DEFAULT_ENV_PATH}/bin/activate"
       echo "Activating ${VIRTUAL_ENV}"
     fi
@@ -91,3 +90,4 @@ function auto_active_env() {
   fi
 }
 chpwd_functions=(${chpwd_functions[@]} "auto_active_env")
+export PATH="/usr/local/sbin:$PATH"
