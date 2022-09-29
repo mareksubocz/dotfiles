@@ -1,0 +1,1 @@
+/Users/mareksubocz/.local/share/scripts/tmux-sessionizer.sh
